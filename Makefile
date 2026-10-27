@@ -16,7 +16,13 @@ $(BOOT_X86): src/boot/x86_bootloader.c
 $(BOOT_RISCV): src/boot/riscv_bootloader.c
 	$(CC) $(CFLAGS) -o $(BOOT_RISCV) src/boot/riscv_bootloader.c
 
+test: all
+	./$(TARGET)
+	./$(BOOT_X86)
+	./$(BOOT_RISCV)
+	@echo "All Kernoperium MVP demos passed."
+
 clean:
 	rm -f $(TARGET) $(BOOT_X86) $(BOOT_RISCV)
 
-.PHONY: all clean
+.PHONY: all clean test
