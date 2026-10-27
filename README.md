@@ -16,6 +16,7 @@ Kernoperium is a small operating-system prototype that models:
 - scheduler decisions based on task utility
 - runtime telemetry and learning feedback
 - x86 and RISC-V bootloader prototypes
+- a desktop shell concept with KDE-like and GNOME-like themes
 
 In plain terms, it is a tiny AI-native kernel blueprint that shows how a kernel might schedule workloads using more than just a static priority queue.
 
@@ -29,6 +30,18 @@ Traditional kernels often prioritize work with fixed weights, such as user prior
 - telemetry feeds back into the task model so future decisions adapt over time
 
 This makes the scheduler more responsive to system load and workload characteristics.
+
+## Interface concept
+
+A matching desktop shell has been added in the `ui/` directory. It is a lightweight, browser-based mock interface for the OS concept and includes:
+
+- KDE-inspired desktop shell styling
+- GNOME-inspired desktop shell styling
+- theme switching
+- system tray, top panel, dock, and desktop icons
+- AI kernel telemetry cards and task panels
+
+This is a concept UI, not a full desktop environment or real OS shell. It is intended as a design mockup and user experience prototype.
 
 ## How it works
 
@@ -94,6 +107,7 @@ The project is organized into a few main parts:
 - `src/ai/ai_core.c` — heuristic scoring and adaptive update logic
 - `src/boot/x86_bootloader.c` — x86 bootloader prototype
 - `src/boot/riscv_bootloader.c` — RISC-V bootloader prototype
+- `ui/` — desktop shell concept with KDE/GNOME styling
 - `docs/os_architecture.md` — large design blueprint
 - `docs/roadmap.md` — roadmap toward a full OS
 - `docs/mvp.md` — short MVP notes
@@ -138,6 +152,21 @@ This simulates a BIOS-like x86 environment and prints the boot metadata.
 
 This simulates a simple RISC-V boot sequence and memory handoff configuration.
 
+### 4. Open the interface prototype
+
+```bash
+cd ui
+python3 -m http.server 8000
+```
+
+Then open:
+
+```text
+http://localhost:8000
+```
+
+You will see a desktop shell mockup and a theme switcher for KDE-like and GNOME-like UIs.
+
 ## How to test it
 
 ### Quick validation
@@ -159,7 +188,7 @@ make clean && make
 
 ### Expected behavior
 
-The kernel demo should print a boot banner, list tasks, show queued interrupts, then select the highest-score task and print telemetry. The bootloader demos should print staged boot messages and metadata.
+The kernel demo should print a boot banner, list tasks, show queued interrupts, then select the highest-score task and print telemetry. The bootloader demos should print staged boot messages and metadata. The interface should load in the browser with a desktop and theme selector.
 
 Example output from the kernel demo:
 
@@ -193,6 +222,7 @@ Use the following checklist to validate the project:
 - selected task changes based on score
 - telemetry values are updated after each tick
 - x86 and RISC-V demo programs complete successfully
+- UI loads at `http://localhost:8000` and theme switching works
 
 ## MVP status
 
@@ -216,6 +246,7 @@ The next realistic phases are:
 4. secure boot and signed modules
 5. filesystem and user-space daemons
 6. hardware-targeted builds for x86_64 or RISC-V64
+7. richer desktop shell UI with real widgets, window manager, and application launcher
 
 ## License
 

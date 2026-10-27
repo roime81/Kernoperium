@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kernoperium Desktop</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="theme-kde">
+    <div class="desktop-shell">
+      <header class="topbar">
+        <div class="system-left">
+          <span class="app-menu">K</span>
+          <span class="workspace-label">Kernoperium</span>
+        </div>
+
+        <div class="system-center">
+          <div class="window-title">AI System Monitor</div>
+        </div>
+
+        <div class="system-right">
+          <span class="status-pill">CPU 72%</span>
+          <span class="status-pill">MEM 58%</span>
+          <span class="status-pill">NET 10.2 Mbps</span>
+          <span class="time" id="clock">--:--</span>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <aside class="sidebar">
+          <div class="panel panel-small">
+            <h3>System</h3>
+            <ul>
+              <li>Kernel: MVP</li>
+              <li>Mode: AI-Sched</li>
+              <li>Boot: x86/riscv</li>
+            </ul>
+          </div>
+
+          <div class="panel panel-small">
+            <h3>Telemetry</h3>
+            <div class="metric-row">
+              <span>Load</span>
+              <strong>0.83</strong>
+            </div>
+            <div class="metric-row">
+              <span>Priority</span>
+              <strong>74.0</strong>
+            </div>
+            <div class="metric-row">
+              <span>AI</span>
+              <strong>0.89</strong>
+            </div>
+          </div>
+        </aside>
+
+        <section class="desktop-area">
+          <div class="desktop-grid">
+            <div class="desktop-icon">
+              <div class="icon-folder"></div>
+              <span>kernel</span>
+            </div>
+            <div class="desktop-icon">
+              <div class="icon-app"></div>
+              <span>scheduler</span>
+            </div>
+            <div class="desktop-icon">
+              <div class="icon-db"></div>
+              <span>telemetry</span>
+            </div>
+            <div class="desktop-icon">
+              <div class="icon-terminal"></div>
+              <span>terminal</span>
+            </div>
+          </div>
+
+          <div class="panel main-panel">
+            <div class="panel-header">
+              <span>Runtime Control</span>
+              <button class="theme-toggle" id="themeToggle">Toggle Theme</button>
+            </div>
+
+            <div class="cards">
+              <div class="card">
+                <div class="card-label">Selected Task</div>
+                <div class="card-value">user_agent</div>
+              </div>
+              <div class="card">
+                <div class="card-label">Interrupt Queue</div>
+                <div class="card-value">3 active</div>
+              </div>
+              <div class="card">
+                <div class="card-label">Confidence</div>
+                <div class="card-value">0.89</div>
+              </div>
+              <div class="card">
+                <div class="card-label">CPU Affinity</div>
+                <div class="card-value">92%</div>
+              </div>
+            </div>
+
+            <div class="task-list">
+              <div class="task-item task-active">
+                <span class="dot green"></span>
+                user_agent
+                <small>priority: 77 | urgency: 96</small>
+              </div>
+              <div class="task-item">
+                <span class="dot blue"></span>
+                neural_guard
+                <small>priority: 82 | urgency: 91</small>
+              </div>
+              <div class="task-item">
+                <span class="dot amber"></span>
+                power_balancer
+                <small>priority: 91 | urgency: 84</small>
+              </div>
+              <div class="task-item">
+                <span class="dot purple"></span>
+                memory_tuner
+                <small>priority: 68 | urgency: 72</small>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="dock">
+        <button class="dock-icon active">K</button>
+        <button class="dock-icon">S</button>
+        <button class="dock-icon">T</button>
+        <button class="dock-icon">N</button>
+        <button class="dock-icon">D</button>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

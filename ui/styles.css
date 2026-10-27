@@ -1,0 +1,343 @@
+:root {
+  --bg-1: #0d1322;
+  --bg-2: #101a2a;
+  --panel: rgba(18, 27, 39, 0.8);
+  --panel-strong: rgba(12, 18, 27, 0.96);
+  --accent: #4ec9ff;
+  --accent-2: #78f0d3;
+  --text: #ebf4ff;
+  --muted: #a2b7d0;
+  --border: rgba(255, 255, 255, 0.08);
+  --shadow: rgba(0, 0, 0, 0.28);
+}
+
+body.theme-gnome {
+  --bg-1: #1b1d2b;
+  --bg-2: #2a2d3f;
+  --panel: rgba(30, 32, 46, 0.84);
+  --panel-strong: rgba(18, 20, 29, 0.97);
+  --accent: #89d4ff;
+  --accent-2: #8fe39d;
+  --text: #f8fbff;
+  --muted: #dfe9fb;
+  --border: rgba(255, 255, 255, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
+  color: var(--text);
+}
+
+body {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.desktop-shell {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(circle at top left, rgba(78, 201, 255, 0.18), transparent 35%),
+    linear-gradient(180deg, rgba(255,255,255,0.02), transparent 20%);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 42px;
+  padding: 0 18px;
+  background: rgba(9, 14, 20, 0.4);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+
+.system-left, .system-right, .system-center {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app-menu {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  background: linear-gradient(45deg, var(--accent), var(--accent-2));
+  color: #07111d;
+  font-weight: 700;
+}
+
+.workspace-label,
+.window-title,
+.time,
+.status-pill {
+  font-size: 12px;
+  color: var(--text);
+}
+
+.status-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  padding: 5px 8px;
+  border-radius: 999px;
+}
+
+.workspace {
+  flex: 1;
+  display: flex;
+  padding: 18px;
+  gap: 18px;
+}
+
+.sidebar {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.panel-small {
+  padding: 14px 16px;
+}
+
+.panel h3 {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.panel ul {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.8;
+  color: var(--text);
+  font-size: 13px;
+}
+
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.desktop-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.desktop-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(110px, 1fr));
+  gap: 18px;
+  padding-top: 8px;
+}
+
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--text);
+  font-size: 12px;
+  gap: 10px;
+}
+
+.icon-folder,
+.icon-app,
+.icon-db,
+.icon-terminal {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
+}
+
+.icon-folder {
+  background: linear-gradient(180deg, #ffcc66, #d88d2f);
+}
+
+.icon-app {
+  background: linear-gradient(180deg, #6ae1ff, #1d7ad7);
+}
+
+.icon-db {
+  background: linear-gradient(180deg, #8cffa7, #2db561);
+}
+
+.icon-terminal {
+  background: linear-gradient(180deg, #d2d8f7, #7c89ea);
+}
+
+.main-panel {
+  flex: 1;
+  padding: 18px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.theme-toggle {
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(170px, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.card {
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.card-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.card-value {
+  margin-top: 8px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+  font-size: 14px;
+  color: var(--text);
+}
+
+.task-item small {
+  margin-left: auto;
+  color: var(--muted);
+}
+
+.task-active {
+  background: rgba(78, 201, 255, 0.1);
+  border-color: rgba(78, 201, 255, 0.35);
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot.green { background: #62f2a1; }
+.dot.blue { background: #69d0ff; }
+.dot.amber { background: #ffc857; }
+.dot.purple { background: #d4a2ff; }
+
+.dock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  height: 76px;
+  background: rgba(12, 17, 24, 0.5);
+  border-top: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+}
+
+.dock-icon {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dock-icon.active {
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  color: #06121d;
+}
+
+@media (max-width: 900px) {
+  .workspace {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .desktop-grid {
+    grid-template-columns: repeat(2, minmax(110px, 1fr));
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .system-right {
+    display: none;
+  }
+}
