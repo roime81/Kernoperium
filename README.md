@@ -2,36 +2,55 @@
 
 Native AI Kernel of the Next Generation OS.
 
-Kernoperium is a research-oriented operating-system kernel blueprint built around one idea: the scheduler is not a static priority queue; it is an adaptive, model-aware runtime system that reasons about workload urgency, user intent, resource pressure, and system goals.
+Kernoperium is a research operating-system kernel architecture designed around a simple but powerful principle: the kernel is not just a scheduler, but a closed-loop control system that continuously evaluates workload utility, resource pressure, and system health. This repository is a technical prototype for a next-generation AI-native microkernel.
 
-This repository contains a minimal but realistic prototype in C that demonstrates the core ideas behind a native AI kernel:
+## What is included
 
-- adaptive task scoring
-- AI-guided scheduler selection
-- system telemetry and health tracking
-- a microkernel-inspired execution model
+This repository now contains a staged prototype set:
 
-## Architecture at a glance
+- a microkernel task model with interrupt handling simulation
+- an AI-aware scheduler with heuristic scoring and adaptive telemetry
+- x86 and RISC-V bootloader prototypes
+- an architecture and roadmap document for the OS
 
-- `include/kernoperium.h` — shared kernel data structures and APIs
-- `src/ai/ai_core.c` — lightweight inference layer for task ranking
-- `src/kernel.c` — runtime loop and scheduler demonstration
-- `docs/architecture.md` — deeper technical design notes
+## Project structure
 
-## Build and run
+- `include/kernoperium.h` — shared kernel definitions and interfaces
+- `src/ai/ai_core.h` — AI scheduler declarations
+- `src/ai/ai_core.c` — heuristic scoring and learning logic
+- `src/kernel.c` — microkernel task and interrupt simulation
+- `src/boot/x86_bootloader.c` — x86 bootstrap prototype
+- `src/boot/riscv_bootloader.c` — RISC-V bootstrap prototype
+- `docs/os_architecture.md` — operating-system architecture blueprint
+- `docs/roadmap.md` — long-term implementation roadmap
+
+## Build
 
 ```bash
 make
-./kernoperium_demo
 ```
 
-## What this prototype demonstrates
+This produces:
 
-Kernoperium models the kernel as a closed-loop control system:
+- `kernoperium_demo`
+- `x86_bootloader_demo`
+- `riscv_bootloader_demo`
 
-1. tasks arrive with urgency, affinity, and confidence metadata
-2. the AI core calculates a composite score for each task
-3. the scheduler selects the task with the best expected system outcome
-4. telemetry captures the decision quality and CPU pressure
+## Run
 
-This is intentionally designed as a starting point for a next-generation OS architecture, not a production kernel. It is best viewed as a blueprint for a future native AI operating system.
+```bash
+./kernoperium_demo
+./x86_bootloader_demo
+./riscv_bootloader_demo
+```
+
+## Design goals
+
+The system is organized around four layers:
+
+1. boot and platform bring-up
+2. interrupt and task management
+3. AI-guided scheduling and resource balancing
+4. system telemetry and long-term optimization
+
+This repository intentionally focuses on architectural clarity rather than production-system completeness. It is a plausible foundation for a future AI-native kernel and operating system.
