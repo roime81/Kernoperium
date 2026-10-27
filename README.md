@@ -1,28 +1,37 @@
-# Kernoperium
+# Kernoperium MVP
 
 Native AI Kernel of the Next Generation OS.
 
-Kernoperium is a research operating-system kernel architecture designed around a simple but powerful principle: the kernel is not just a scheduler, but a closed-loop control system that continuously evaluates workload utility, resource pressure, and system health. This repository is a technical prototype for a next-generation AI-native microkernel.
+Kernoperium MVP is a runnable prototype of an AI-native operating system kernel. It demonstrates a minimal but realistic control loop:
 
-## What is included
+- boot sequence simulation
+- interrupt-driven event handling
+- task queue management
+- adaptive scheduler scoring
+- telemetry and learning feedback
+- x86 and RISC-V bootstrap prototypes
 
-This repository now contains a staged prototype set:
+This project is intentionally engineered as a minimum viable product for research and demonstration, not as a production kernel.
 
-- a microkernel task model with interrupt handling simulation
-- an AI-aware scheduler with heuristic scoring and adaptive telemetry
-- x86 and RISC-V bootloader prototypes
-- an architecture and roadmap document for the OS
+## MVP feature set
 
-## Project structure
+- Boot and initialization flow
+- Microkernel-style task state model
+- Interrupt queue and event dispatch simulation
+- AI-guided scheduling with heuristic score
+- Runtime telemetry and confidence adaptation
+- Buildable demos for kernel + bootloader prototypes
 
-- `include/kernoperium.h` — shared kernel definitions and interfaces
-- `src/ai/ai_core.h` — AI scheduler declarations
-- `src/ai/ai_core.c` — heuristic scoring and learning logic
-- `src/kernel.c` — microkernel task and interrupt simulation
-- `src/boot/x86_bootloader.c` — x86 bootstrap prototype
-- `src/boot/riscv_bootloader.c` — RISC-V bootstrap prototype
-- `docs/os_architecture.md` — operating-system architecture blueprint
-- `docs/roadmap.md` — long-term implementation roadmap
+## Repository structure
+
+- `include/kernoperium.h` — shared kernel API and data structures
+- `src/kernel.c` — MVP kernel runtime and demo loop
+- `src/ai/ai_core.c` — task scoring and adaptive policy logic
+- `src/boot/x86_bootloader.c` — x86 boot prototype
+- `src/boot/riscv_bootloader.c` — RISC-V boot prototype
+- `docs/mvp.md` — MVP overview and engineering notes
+- `docs/os_architecture.md` — architecture blueprint
+- `docs/roadmap.md` — future roadmap
 
 ## Build
 
@@ -30,27 +39,36 @@ This repository now contains a staged prototype set:
 make
 ```
 
-This produces:
-
-- `kernoperium_demo`
-- `x86_bootloader_demo`
-- `riscv_bootloader_demo`
-
 ## Run
 
 ```bash
-./kernoperium_demo
+./kernoperium_mvp
 ./x86_bootloader_demo
 ./riscv_bootloader_demo
 ```
 
-## Design goals
+## Example output
 
-The system is organized around four layers:
+```text
+Kernoperium booting...
+Native AI Kernel of the Next Generation OS
+========================================
+[boot] initializing platform services
+[boot] loading kernel image into memory
+[task 4] user_agent          state=0 prio= 77 urgency= 96 affinity= 92 confidence=0.96 score=0.86
+...
+Selected task for execution: user_agent
+Telemetry: active=5 mean_priority=74.00 ai_confidence=0.89 load=0.83 tick=1
+```
 
-1. boot and platform bring-up
-2. interrupt and task management
-3. AI-guided scheduling and resource balancing
-4. system telemetry and long-term optimization
+## MVP status
 
-This repository intentionally focuses on architectural clarity rather than production-system completeness. It is a plausible foundation for a future AI-native kernel and operating system.
+Status: operational as a simulation and design validation tool.
+
+Next steps toward a production kernel:
+- privilege separation and syscall layer
+- real interrupt vector table
+- memory allocator and paging
+- secure boot and signed modules
+- real user-mode runtime
+

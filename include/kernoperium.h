@@ -7,6 +7,7 @@
 #define KERNEL_MAX_TASKS 16
 #define KERNEL_MAX_IRQS 16
 #define KERNEL_NAME_LEN 32
+#define KERNEL_MESSAGE_LEN 64
 
 typedef enum {
     TASK_READY = 0,
@@ -38,6 +39,7 @@ typedef struct {
     uint64_t deadline;
     int cpu;
     KernelTaskState state;
+    float execution_time;
 } KernelTask;
 
 typedef struct {
@@ -45,7 +47,7 @@ typedef struct {
     KernelInterruptType type;
     uint64_t timestamp;
     int cpu;
-    char message[KERNEL_NAME_LEN];
+    char message[KERNEL_MESSAGE_LEN];
 } KernelInterrupt;
 
 typedef struct {
@@ -70,6 +72,7 @@ int ai_select_task(const KernelTask *tasks, int count);
 void ai_update_telemetry(KernelTelemetry *telemetry, const KernelTask *tasks, int count);
 void ai_learning_update(KernelTask *task, float outcome);
 void kernel_init(void);
+void kernel_demo_run(void);
 void interrupt_raise(KernelRuntime *runtime, KernelInterruptType type, int vector, int cpu, const char *message);
 void scheduler_tick(KernelRuntime *runtime, KernelTelemetry *telemetry);
 

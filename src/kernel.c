@@ -15,10 +15,22 @@ static void print_task(const KernelTask *task) {
            ai_score_task(task));
 }
 
+static void print_irq(const KernelInterrupt *irq) {
+    printf("  IRQ[%d] type=%d vector=%d cpu=%d msg=%s\n",
+           irq->vector,
+           irq->type,
+           irq->vector,
+           irq->cpu,
+           irq->message);
+}
+
 void kernel_init(void) {
     printf("Kernoperium booting...\n");
     printf("Native AI Kernel of the Next Generation OS\n");
     printf("========================================\n");
+    printf("[boot] initializing platform services\n");
+    printf("[boot] loading kernel image into memory\n");
+    printf("[boot] preparing scheduler and interrupt vectors\n\n");
 }
 
 void interrupt_raise(KernelRuntime *runtime, KernelInterruptType type, int vector, int cpu, const char *message) {
@@ -27,10 +39,10 @@ void interrupt_raise(KernelRuntime *runtime, KernelInterruptType type, int vecto
     }
 
     KernelInterrupt *irq = &runtime->irq_queue[runtime->irq_count];
-    irq->type = type;
     irq->vector = vector;
-    irq->cpu = cpu;
+    irq->type = type;
     irq->timestamp = (uint64_t)runtime->irq_count + 1U;
+    irq->cpu = cpu;
     irq->message[0] = '\0';
 
     if (message != NULL) {
@@ -50,13 +62,7 @@ void scheduler_tick(KernelRuntime *runtime, KernelTelemetry *telemetry) {
     if (runtime->irq_count > 0) {
         printf("\nInterrupt queue (%d):\n", runtime->irq_count);
         for (int i = 0; i < runtime->irq_count; ++i) {
-            const KernelInterrupt *irq = &runtime->irq_queue[i];
-            printf("  IRQ[%d] type=%d vector=%d cpu=%d msg=%s\n",
-                   i,
-                   irq->type,
-                   irq->vector,
-                   irq->cpu,
-                   irq->message);
+            print_irq(&runtime->irq_queue[i]);
         }
     }
 
@@ -88,21 +94,19 @@ void scheduler_tick(KernelRuntime *runtime, KernelTelemetry *telemetry) {
            (unsigned long long)telemetry->tick_count);
 }
 
-int main(void) {
-    kernel_init();
-
+void kernel_demo_run(void) {
     KernelRuntime runtime = {0};
     runtime.task_count = 5;
 
     KernelTask tasks[] = {
-        {1, "neural_guard", 82, 91, 88, 0.94f, 100, 0, TASK_READY},
-        {2, "memory_tuner", 68, 72, 76, 0.81f, 230, 1, TASK_READY},
-        {3, "power_balancer", 91, 84, 70, 0.89f, 180, 2, TASK_READY},
-        {4, "user_agent", 77, 96, 92, 0.96f, 90, 0, TASK_READY},
-        {5, "network_orchestrator", 73, 80, 86, 0.83f, 150, 3, TASK_READY}
+        {1, "neural_guard", 82, 91, 88, 0.94f, 100, 0, TASK_READY, 0.25f},
+        {2, "memory_tuner", 68, 72, 76, 0.81f, 230, 1, TASK_READY, 0.40f},
+        {3, "power_balancer", 91, 84, 70, 0.89f, 180, 2, TASK_READY, 0.35f},
+        {4, "user_agent", 77, 96, 92, 0.96f, 90, 0, TASK_READY, 0.22f},
+        {5, "network_orchestrator", 73, 80, 86, 0.83f, 150, 3, TASK_READY, 0.46f}
     };
 
-    for (int i = 0; i < 5; ++i) {
+    for (int i = 0; i < runtime.task_count; ++i) {
         runtime.tasks[i] = tasks[i];
     }
 
@@ -112,9 +116,18 @@ int main(void) {
 
     KernelTelemetry telemetry = {0, 0, 0.0f, 0.0f, 0.0f, 0, -1};
 
-    scheduler_tick(&runtime, &telemetry);
-    scheduler_tick(&runtime, &telemetry);
-    scheduler_tick(&runtime, &telemetry);
+    for (int tick = 0; tick < 3; ++tick) {
+        printf("=== scheduler tick %d ===\n", tick + 1);
+        scheduler_tick(&runtime, &telemetry);
+    }
 
+    printf("MVP summary: selected task #%d for final execution window.\n", telemetry.last_selected_id);
+    printf("System load factor: %.3f\n", telemetry.load_factor);
+    printf("AI confidence: %.3f\n", telemetry.ai_confidence);
+}
+
+int main(void) {
+    kernel_init();
+    kernel_demo_run();
     return 0;
 }

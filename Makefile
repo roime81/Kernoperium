@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -std=c11 -Wall -Wextra -O2 -Iinclude -Isrc/ai
 
-TARGET = kernoperium_demo
+TARGET = kernoperium_mvp
 BOOT_X86 = x86_bootloader_demo
 BOOT_RISCV = riscv_bootloader_demo
 

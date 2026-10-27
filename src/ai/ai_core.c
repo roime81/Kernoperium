@@ -1,6 +1,5 @@
 #include "ai_core.h"
 
-#include <math.h>
 #include <stdio.h>
 
 static float clampf(float value, float min_value, float max_value) {
@@ -17,15 +16,12 @@ static float deadline_bias(uint64_t deadline) {
     if (deadline == 0U) {
         return 0.15f;
     }
-
     if (deadline < 100U) {
         return 0.95f;
     }
-
     if (deadline < 500U) {
         return 0.75f;
     }
-
     return 0.50f;
 }
 
